@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  flask-backend:
+    build:
+      context: ./backend
+    container_name: flask-backend
+    ports:
+      - "8000:8000" 
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+    volumes:
+      - ./path-to-flask:/app  
+
+  react-frontend:
+    build:
+      context: ./frontend 
+    container_name: react-frontend
+    ports:
+      - "3000:3000"  
+    depends_on:
+      - flask-backend 
